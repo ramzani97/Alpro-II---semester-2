@@ -1,0 +1,123 @@
+			                                                                                   Algoritma & Pemrograman 2
+Tugas   : Rangkuman Binary Search
+Nama  : Ramzani
+Nim     : 16 111 239
+Kelas   : TIF 16B RM
+
+
+Algoritma Pencarian
+	Dalam ilmu komputer, sebuah algoritma pencarian dijelaskan secara luas adalah sebuah algoritma yang menerima masukan 
+berupa sebuah masalah dan menghasilkan sebuah solusi untuk masalah tersebut, yang biasanya didapat dari evaluasi beberapa kemungkinan solusi.
+Sebagian besar algoritma yang dipelajari oleh ilmuwan komputer adalah algoritma pencarian. Himpunan semua kemungkinan solusi dari sebuah masalah
+disebut ruang pencarian. Algortima pencarian brute-force atau pencarian naif/uninformed menggunakan metode yang sederhana dan sangat intuitif pada
+ruang pencarian, sedangkan algoritma pencarian informed menggunakan heuristik untuk menerapkan pengetahuan tentang struktur dari ruang pencarian 
+untuk berusaha mengurangi banyaknya waktu yang dipakai dalam pencarian. Searching adalah mencari data yang dibutuhkan. Searching dalam pemrograman
+bisa dilakukan untuk mencari data yang ada di dalam memory komputer.Dalam kehidupan sehari-hari kita juga sering melakukan kegiatan searching seperti 
+mencari data/informasi yang ada dalam internet.
+ 
+Pencarian Bagi Dua (Binary Search)
+     Binary search atau yang lebih kita kenal pencarian bagi dua adalah metode pencarian suatu data di dalam suatu array dengan kondisi data dalam
+ keadaan terurut. Proses pencarian binary search hanya dapat dilakukan pada sekumpulan data yang sudah di urutkan terlebih dahulu.
+
+ sistem kerja algoritma binary search ini adalah menggunakan elemen yang di cari (key) sebagai pembandingselanjutnya di bagi menjadi 2 buah elemen,
+yang menentukan apakah data yang berada pada elemen tengah sama, lebih dari atau kurang dari nilai dari data yang di cari. Jika bernilai sama, 
+maka langsung data yang di cari di temukan, dan jika data di elemen terurut naik, maka data yang di tengah kurang dari data yang di cari, maka
+selanjutnya pencarian berkisar elemen tengah ke kanan, dan begitu seterusanya sampai ketemuatau tidak sama sekali.
+
+Tujuan Algoritma Pencarian Bagi Dua (Bimary Search)
+   Algoritma Pencarian bagi dua (Binary Search) bertujuan untuk :
+a. Memperkcil jumlah operasi pembandingan yang harus dilakukan antara yang di cari dengan data yang ada di dalam tabel,
+ khusunya untuk jumlah data yang sangat besar ukurannya.
+b. Prinsip dasarnya adalah melakukan proses pembagian ruang pencarian secara berulang ulang sampai data di temukan sampai
+ruang pencarian tidak dapat di bagi lagi (berarti ada kemungkinan data tidak ditemukan.
+c. Syarat utama pencarian bagi dua adalah data di dalam tabel harus sudah terurut, misalkan terurut menaik. 
+
+Prose Yang Terjadi Pada Metode Ini Adalah Sebagai Berikut :
+1. Memebaca data array.
+2. Apabila array belum terurut maka array di urutkan terlebih dahulu.
+3. Menentukan data yang akan dicari
+4. Menetukan aray elem tengah.
+5. Jika elemen tengah sama dengan data yang akan di cari, maka pencarian berhenti.
+6. Jika data tengah tidak sama dengan data yang di cari maka :
+  a. JIka elemen tengan > data yang di cari maka pencarian di lakukan pada setengah array pertama.
+  b. Jika elemen tengah kecil dari pada data yang di cari maka pencarian berikutnyadi lakukan pada setengah array berikumya.
+
+Ilustrasi Algoritma Bagi Dua (Binary Search)
+Misalkan saya mempunyai data sebagai berikut : | 8 | 12 | 25 | 57 | 37 | 5 | 2 | 15 | maka data tersebut akan di cek dan ternyata setelah di cek,
+data tersebut belum terurut, maka selanjutnya kita urutkan dulu datanya menjadi | 2 | 5 | 8 | 12 | 15 | 25 | 37 | 57 | dan selanjutnya tentukan 
+elemen tengahnya misalkan kita ambil : 12, jika data tengahsama dengan data yang akan di cari maka pencarian selesai, jika tidak sama dengan
+data yang akan di cari selanjutnya pemroses akan mencari data kebagian kiri, jika tidak ketemu maka pencarian atau pemroses akan di lanjutkan
+ke bagian kanan, jika tidak ketemu juga proses pencarian akan di hentikan.  
+
+contoh array int a [8];
+elemen = | 2 | 5 | 8 | 12 | 15 | 25 | 37 | 57 |
+indeks =   1   2   3   4     5     6      7    8
+cari = 12
+loop pertama : tengah = (imdeks awal + indeks akhir) div2=(1+8)div2=4
+                      elemen [tengah]= elemen[4] =12, berarti loop pertama langsung di temukan.
+
+Kinerja Algoritma Binary Search
+ a. Kelebihan Algoritma Pencarian Bagi Dua (binary Search)
+1. Untuk data lebih besar, waktu searching lebih cepat dan efisien
+2. beban komputasi lebih kecil
+3.Tidak perlu membandingkan data yang di cari dengan seluruh data arrray yang ada, cukup melalui titik tengahkemudian kita bisa menentukan
+ke mana selanjutnya mencari data yang akan di cari.
+ b. Kekurangan Algoritma Pencarian Bagi Dua (Binary Search)
+1. hanya dapat di gunakan pada data yang sudah terurut 
+2. Implementasi agak sedikit lebih rumit karena tidak bisa di gunakan pada data array yang masih acak jadi harusmelakukan sorting terlebih 
+dahulu dalam implemntasinya.
+
+Berikut Contoh Source code Binary search.
+
+-----------------------------------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+int main (){
+	
+	int A[5]={20,30,40,50,60};
+	int i,cari,ia,tengah,ib;
+	
+
+	
+		for(i=0; i<5; i++)
+		{
+
+			cout << A[i] << " | ";
+
+		}
+
+		cout << "\nmmasukan data yang akan di cari : ";
+		cin >> cari;
+
+	ia=0;
+	ib=6;
+
+
+	while (ia<=ib)
+	{
+		tengah=(ia+ib)/2;
+		if (cari>A[tengah]){
+			ia=tengah+1;
+		}
+		
+		else if (cari<A[tengah]){
+			ib=tengah-1;
+		
+		}else{ 
+			ia=ib+1;
+		}
+
+	}
+if (cari==A[tengah])
+	{
+		cout << " data " << cari << " ditemukan";
+	
+	}else{
+		cout << " data tidak ditemukan";
+	}
+return 0;
+}
+
+-----------------------------------------------------------------------------------------------------
